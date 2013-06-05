@@ -8,8 +8,9 @@ def parse_cell(cell):
     except:
         return cell
 
+
 def parse_csv(data, delimiter=','):
-    databuf = StringIO(data)
+    databuf = StringIO(data.encode('utf-8'))
     rows = []
     for row in csv.reader(databuf, delimiter=delimiter):
         rows.append([parse_cell(c) for c in row])
