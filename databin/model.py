@@ -1,13 +1,23 @@
 from datetime import datetime
-from formencode import Schema, validators
+from formencode import Schema, validators, Invalid, FancyValidator
 
 from databin.core import db
 from databin.util import encode, decode
+from databin.parsers import get_parsers
+
+
+class ValidFormat(FancyValidator):
+
+    def _to_python(self, value, state):
+        for key, name in get_parsers():
+            if value == key:
+                return value
+        raise Invalid('Not a valid format', value, None)
 
 
 class PasteSchema(Schema):
     description = validators.String(min=0, max=255)
-    #format = validators.String(min=3, max=255)
+    format = ValidFormat()
     data = validators.String(min=10, max=255000)
 
 

@@ -2,8 +2,9 @@ from flask import render_template, request, redirect, url_for
 from werkzeug.exceptions import NotFound
 from formencode import Invalid, htmlfill
 
-from databin.core import app, db
+from databin.core import app
 from databin.model import Paste
+from databin.parsers import get_parsers
 
 
 @app.route("/t/<key>")
@@ -20,6 +21,7 @@ def post():
         paste = Paste.create(request.form, request.remote_addr)
         return redirect(url_for('view', key=paste.key))
     except Invalid, inv:
+        print inv.unpack_errors()
         return htmlfill.render(index(), auto_insert_errors=False,
                                defaults=request.form,
                                errors=inv.unpack_errors())
@@ -27,7 +29,8 @@ def post():
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('index.html',
+                           parsers=get_parsers())
 
 
 if __name__ == "__main__":
