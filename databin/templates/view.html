@@ -7,6 +7,9 @@
         <div class="alert">Sorry, we were unable to generate the table. Please <a href="/">try again</a>.</div>
         <pre>{{paste.data}}</pre>
       {% else %}
+        <div class="pull-right">
+          <a class="btn btn-small" href="/c/{{paste.key}}"><i class="icon-download"></i> CSV Download</a>
+        </div>
         <p class="claim">
           {{paste.description}}
         </p>
