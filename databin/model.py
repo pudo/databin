@@ -1,6 +1,14 @@
 from datetime import datetime
-from flask import url_for
+from formencode import Schema, validators
+
 from databin.core import db
+from databin.util import encode, decode
+
+
+class PasteSchema(Schema):
+    description = validators.String(min=0, max=255)
+    format = validators.String(min=3, max=255)
+    data = validators.String(min=10, max=255000)
 
 
 class Paste(db.Model):
@@ -14,18 +22,23 @@ class Paste(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     @classmethod
-    def create(cls, service, event, data):
+    def create(cls, data, source_ip):
         obj = cls()
+        obj.source_ip = source_ip
+        obj.description = data.get('description')
+        obj.format = data.get('format')
+        obj.data = data.get('data')
         return obj
 
     @classmethod
-    def by_hash(cls, hash):
-        q = db.session.query(cls).filter_by(hash=hash)
+    def by_key(cls, key):
+        q = db.session.query(cls).filter_by(id=decode(key))
         return q.first()
 
     def to_dict(self):
         return {
             'id': self.id,
+            'key': encode(self.id),
             'source_ip': self.source_ip,
             'description': self.description,
             'format': self.format,
@@ -36,3 +49,5 @@ class Paste(db.Model):
     @classmethod
     def all(cls):
         return db.session.query(cls)
+
+db.create_all()

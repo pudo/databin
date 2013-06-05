@@ -1,6 +1,6 @@
 
 
-def base36encode(number):
+def encode(number):
     if not isinstance(number, (int, long)):
         raise TypeError('number must be an integer')
     if number < 0:
@@ -16,5 +16,5 @@ def base36encode(number):
     return base36 or alphabet[0]
 
 
-def base36decode(number):
+def decode(number):
     return int(number, 36)
