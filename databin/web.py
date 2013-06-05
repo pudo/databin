@@ -14,7 +14,7 @@ def view(key):
     return render_template('view.html', paste=paste.to_dict())
 
 
-@app.route("/")
+@app.route("/", methods=['POST'])
 def post():
     pass
 
