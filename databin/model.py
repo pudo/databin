@@ -7,7 +7,7 @@ from databin.util import encode, decode
 
 class PasteSchema(Schema):
     description = validators.String(min=0, max=255)
-    format = validators.String(min=3, max=255)
+    #format = validators.String(min=3, max=255)
     data = validators.String(min=10, max=255000)
 
 
@@ -21,13 +21,20 @@ class Paste(db.Model):
     data = db.Column(db.Unicode())
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    @property
+    def key(self):
+        return encode(self.id)
+
     @classmethod
     def create(cls, data, source_ip):
         obj = cls()
+        data = PasteSchema().to_python(data)
         obj.source_ip = source_ip
         obj.description = data.get('description')
         obj.format = data.get('format')
         obj.data = data.get('data')
+        db.session.add(obj)
+        db.session.commit()
         return obj
 
     @classmethod
@@ -38,7 +45,7 @@ class Paste(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'key': encode(self.id),
+            'key': self.key,
             'source_ip': self.source_ip,
             'description': self.description,
             'format': self.format,
