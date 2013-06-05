@@ -12,6 +12,7 @@
   <meta name="viewport" content="width=device-width">
   <link href="http://assets.okfn.org/p/labs/201210/css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" href="http://assets.pudo.org/fonts/open-sans/stylesheet.css" type="text/css" />
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script src="http://assets.okfn.org/p/labs/201210/js/bootstrap.js"></script>
@@ -20,20 +21,23 @@
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>databin <small>a paste for tables</small></h1>
-  </div>
-  <div id="page" class="container">
-      {% block content %}
-         - No Content -
-      {% endblock %}
+  <div id="airlock">
+    <div class="container">
+      <h1><i class="icon-th-list"></i> databin <small>a paste for tables</small></h1>
+    </div>
+    <div id="page" class="container">
+        {% block content %}
+           - No Content -
+        {% endblock %}
+    </div>
   </div>
   <footer>
     <div class="container">
         <ul>
-            <li><a href="http://github.com/pudo/databin">Source Code</a></li>
-            <li>&copy; 2013: Friedrich Lindenberg</li>
+            <li><i class="icon-github"></i> <a href="http://github.com/pudo/databin">code</a></li>
+            <li>by <i class="icon-twitter"></i> <a href="http://twitter.com/pudo">pudo</a></li>
         </ul>
+        <p>Tables are for friends.</p>
     </div>
   </footer>
 

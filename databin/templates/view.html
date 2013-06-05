@@ -7,6 +7,9 @@
         <div class="alert">Sorry, we were unable to generate the table. Please <a href="/">try again</a>.</div>
         <pre>{{paste.data}}</pre>
       {% else %}
+        <p class="claim">
+          {{paste.description}}
+        </p>
         <table class="table table-condensed table-striped">
           {% for row in table %}
             <tr>

@@ -22,7 +22,7 @@ class PasteSchema(Schema):
 
 
 class Paste(db.Model):
-    __tablename__ = 'frame'
+    __tablename__ = 'paste'
 
     id = db.Column(db.Integer, primary_key=True)
     source_ip = db.Column(db.Unicode())

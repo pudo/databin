@@ -3,21 +3,38 @@
 {% block content %}
   <div class="row">
     <div class="span12">
-      This is not a web site. 
+      <p class="claim">
+        <strong>databin</strong> helps you to share tabular data &mdash; a few rows form Excel or a result from a SQL prompt &mdash; with others.
+      </p>
 
       <form:iferror name="data" class="hidden">
         <div class="alert">You haven't submitted any table data.</div>
       </form:iferror>
 
-      <form action="/" method="POST">
-        <textarea class="span12" name="data" rows="20"></textarea>
-        <input name="description" class="span12 xlarge">
-        <select name="format">
-          {% for (k, v) in parsers %}
-            <option value="{{k}}">{{v}}</option>
-          {% endfor %}
-        </select>
-        <button type="submit" class="btn">Create paste</button>
+      <form action="/" method="POST" class="form-horizontal">
+        <textarea class="span12" name="data" rows="20" placeholder="Your, table, goes, here"></textarea>
+        <hr>
+        <div class="control-group">
+          <label class="control-label" for="description">Description</label>
+          <div class="controls">
+            <input type="text" name="description" class="span7" placeholder="e.g. a SQL query">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="format">Format</label>
+          <div class="controls">
+            <select name="format">
+              {% for (k, v) in parsers %}
+                <option value="{{k}}">{{v}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <button type="submit" class="btn btn-inverse btn-large">Create paste</button>
+          </div>
+        </div>
       </form>
     </div>
   </div>
