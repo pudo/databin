@@ -5,9 +5,9 @@
     <div class="span12">
       This is not a web site. 
 
-      <form:iferror name="data">
+      <form:iferror name="data" class="hidden">
         <div class="alert">You haven't submitted any table data.</div>
-        </form:iferror>
+      </form:iferror>
 
       <form action="/" method="POST">
         <textarea class="span12" name="data" rows="20"></textarea>

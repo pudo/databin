@@ -1,10 +1,14 @@
+import logging
+
 from flask import render_template, request, redirect, url_for
 from werkzeug.exceptions import NotFound
 from formencode import Invalid, htmlfill
 
 from databin.core import app
 from databin.model import Paste
-from databin.parsers import get_parsers
+from databin.parsers import get_parsers, ParseException, parse
+
+log = logging.getLogger(__name__)
 
 
 @app.route("/t/<key>")
@@ -12,7 +16,15 @@ def view(key):
     paste = Paste.by_key(key)
     if paste is None:
         raise NotFound('No such table: %s' % key)
-    return render_template('view.html', paste=paste.to_dict())
+    has_header, table = False, None
+    try:
+        has_header, table = parse(paste.format, paste.data)
+    except ParseException, pe:
+        log.error("Failed to parse.")
+    return render_template('view.html',
+                           paste=paste.to_dict(),
+                           has_header=has_header,
+                           table=table)
 
 
 @app.route("/", methods=['POST'])

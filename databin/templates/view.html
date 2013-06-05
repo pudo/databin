@@ -3,13 +3,26 @@
 {% block content %}
   <div class="row">
     <div class="span12">
-      <table class="table table-condensed table-striped">
-        <tr>
-          <td>HUHU</td>
-        </tr>
-      </table>
-
-      <pre>{{paste.data}}</pre>
+      {% if not table %}
+        <div class="alert">Sorry, we were unable to generate the table. Please <a href="/">try again</a>.</div>
+        <pre>{{paste.data}}</pre>
+      {% else %}
+        <table class="table table-condensed table-striped">
+          {% for row in table %}
+            <tr>
+              {% if loop.first and has_header %}
+                {% for cell in row %}
+                  <th>{{cell}}</th>
+                {% endfor %}    
+              {% else %}
+                {% for cell in row %}
+                  <td>{{cell}}</td>
+                {% endfor %}
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </table>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

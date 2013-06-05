@@ -1,4 +1,14 @@
 
 body {
-    background-color: #F54CEA;
+    background-color: #eee;
+    font-family: 'OpenSansRegular', Helvetica, sans-serif;
+}
+
+h1, table th {
+    font-weight: normal;
+    font-family: 'OpenSansBold', Helvetica, sans-serif;
+}
+
+.hidden {
+    display: none;
 }

@@ -5,7 +5,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 from databin import default_settings
 
-logging.basicConfig(level=logging.WARN)
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 app.config.from_object(default_settings)
