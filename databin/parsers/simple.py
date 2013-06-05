@@ -16,6 +16,9 @@ def parse_csv(data, delimiter=','):
     return False, rows
 
 
-
 def parse_tsv(data):
     return parse_csv(data, delimiter='\t')
+
+
+def parse_ssv(data):
+    return parse_csv(data, delimiter=' ')
