@@ -1,7 +1,7 @@
 
 body, label {
     font-family: 'OpenSansRegular', Helvetica, sans-serif;
-    font-size: 17px;
+    font-size: 15px;
 }
 
 h1, table th, strong {
@@ -32,6 +32,7 @@ a:hover {
 .claim {
     font-size: 1.3em;
     line-height: 1.5em;
+    padding: 0.5em 0 1em 0;
     color: #666;
 }
 
@@ -52,7 +53,7 @@ textarea {
 }
 
 table, table th, table td {
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
