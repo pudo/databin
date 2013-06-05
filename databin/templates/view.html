@@ -10,21 +10,23 @@
         <p class="claim">
           {{paste.description}}
         </p>
-        <table class="table table-condensed table-striped">
-          {% for row in table %}
-            <tr>
-              {% if loop.first and has_header %}
-                {% for cell in row %}
-                  <th>{{cell}}</th>
-                {% endfor %}    
-              {% else %}
-                {% for cell in row %}
-                  <td>{{cell}}</td>
-                {% endfor %}
-              {% endif %}
-            </tr>
-          {% endfor %}
-        </table>
+        <div class="tablewrap">
+          <table class="table table-condensed table-striped">
+            {% for row in table %}
+              <tr>
+                {% if loop.first and has_header %}
+                  {% for cell in row %}
+                    <th>{{cell}}</th>
+                  {% endfor %}    
+                {% else %}
+                  {% for cell in row %}
+                    <td>{{cell}}</td>
+                  {% endfor %}
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
       {% endif %}
     </div>
   </div>

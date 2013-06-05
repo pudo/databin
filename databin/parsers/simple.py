@@ -2,11 +2,17 @@ from StringIO import StringIO
 import csv
 
 
+def parse_cell(cell):
+    try:
+        return cell.decode('utf-8')
+    except:
+        return cell
+
 def parse_csv(data, delimiter=','):
     databuf = StringIO(data)
     rows = []
     for row in csv.reader(databuf, delimiter=delimiter):
-        rows.append(row)
+        rows.append([parse_cell(c) for c in row])
     return False, rows
 
 
