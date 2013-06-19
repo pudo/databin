@@ -60,5 +60,14 @@ def index():
                            parsers=get_parsers())
 
 
+for paste in Paste.all():
+    if paste.key is None:
+        from databin.util import encode
+        from databin.core import db
+        paste.key = encode(paste.id)
+        db.session.add(paste)
+        db.session.commit()
+
+
 if __name__ == "__main__":
     app.run(port=5000)

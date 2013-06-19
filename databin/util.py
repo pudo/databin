@@ -1,5 +1,6 @@
 from flask import make_response
 from StringIO import StringIO
+from uuid import uuid4
 import csv
 
 
@@ -37,3 +38,7 @@ def encode(number):
 
 def decode(number):
     return int(number, 36)
+
+
+def make_key():
+    return uuid4().hex[:6]
