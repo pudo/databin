@@ -9,6 +9,7 @@ from databin.core import app
 from databin.model import Paste
 from databin.util import make_it_cache, make_csv, make_json
 from databin.util import generate_etag, response_format
+from databin.cors import crossdomain
 from databin.parsers import get_parsers, ParseException, parse
 
 log = logging.getLogger(__name__)
@@ -35,6 +36,7 @@ def get_paste(key, format):
 
 @app.route("/t/<key>.<format>")
 @app.route("/t/<key>")
+@crossdomain(origin='*')
 def view(key, format=None):
     format = response_format(format)
     paste, table, has_header, etag = get_paste(key, format)
