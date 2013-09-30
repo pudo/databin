@@ -22,6 +22,7 @@ def get_paste(key):
         has_header, table = parse(paste.format, paste.data)
     except ParseException, pe:
         log.exception(pe)
+    has_header = has_header or paste.force_header
     return paste, table, has_header
 
 
@@ -48,7 +49,6 @@ def post():
         paste = Paste.create(request.form, request.remote_addr)
         return redirect(url_for('view', key=paste.key))
     except Invalid, inv:
-        print inv.unpack_errors()
         return htmlfill.render(index(), auto_insert_errors=False,
                                defaults=request.form,
                                errors=inv.unpack_errors())

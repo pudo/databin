@@ -18,6 +18,7 @@ class ValidFormat(FancyValidator):
 class PasteSchema(Schema):
     description = validators.String(min=0, max=255)
     format = ValidFormat()
+    force_header = validators.StringBool(empty=False)
     data = validators.String(min=10, max=255000)
 
 
@@ -30,6 +31,7 @@ class Paste(db.Model):
     description = db.Column(db.Unicode())
     format = db.Column(db.Unicode())
     data = db.Column(db.Unicode())
+    force_header = db.Column(db.Boolean())
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     @classmethod
@@ -43,6 +45,7 @@ class Paste(db.Model):
         obj.source_ip = source_ip
         obj.description = data.get('description')
         obj.format = data.get('format')
+        obj.force_header = data.get('force_header')
         obj.data = data.get('data')
         db.session.add(obj)
         db.session.commit()
@@ -60,6 +63,7 @@ class Paste(db.Model):
             'source_ip': self.source_ip,
             'description': self.description,
             'format': self.format,
+            'force_header': self.force_header,
             'data': self.data,
             'created_at': self.created_at
         }
